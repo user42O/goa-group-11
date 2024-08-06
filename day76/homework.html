@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #uniqueParagraph {
+            color: rgb(255, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <p id="uniqueParagraph">paragraph</p>
+    <p>paragraph(2)</p>
+
+    <script>
+        var paragraph = document.getElementById("uniqueParagraph");
+
+        paragraph.innerHTML = "javascript";
+        paragraph.style.color = "red";
+    </script>
+</body>
+</html>
