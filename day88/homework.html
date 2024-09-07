@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Carousel</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .carousel-container {
+            display: flex;
+            align-items: center;
+        }
+        img {
+            max-width: 500px;
+            height: auto;
+            margin: 0 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <button id="prevBtn">back</button>
+        <img id="carouselImage" src="image1.jpg" alt="Carousel Image">
+        <button id="nextBtn">next</button>
+    </div>
+
+    <script>
+        const images = ['porsche-911.jpg', 'pagani huayra.webp', 'porsche-panamera.jpg'];
+        let currentIndex = 0;
+
+        const carouselImage = document.getElementById('carouselImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+            carouselImage.src = images[currentIndex];
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+            carouselImage.src = images[currentIndex];
+        });
+    </script>
+</body>
+</html>
