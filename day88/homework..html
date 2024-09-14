@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .game-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .choice img {
+            width: 100px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock, Paper, Scissors</h1>
+        <div class="scoreboard">
+            <div id="user-label" class="badge">User</div>
+            <div id="comp-label" class="badge">Comp</div>
+            <span id="user-score">0</span>:<span id="comp-score">0</span>
+        </div>
+        <div class="choices">
+            <div class="choice" id="rock"><img src="https://img.icons8.com/emoji/100/rock-emoji.png" alt="Rock"></div>
+            <div class="choice" id="paper"><img src="https://img.icons8.com/emoji/100/roll-of-paper-emoji.png" alt="Paper"></div>
+            <div class="choice" id="scissors"><img src="https://img.icons8.com/emoji/100/scissors-emoji.png" alt="Scissors"></div>
+        </div>
+        <p id="result">Make your move!</p>
+    </div>
+
+    <script>
+        let userScore = 0;
+        let compScore = 0;
+        const userScoreSpan = document.getElementById("user-score");
+        const compScoreSpan = document.getElementById("comp-score");
+        const resultDiv = document.getElementById("result");
+        const choices = document.querySelectorAll(".choice");
+
+        const getComputerChoice = () => {
+            const choices = ["rock", "paper", "scissors"];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choices[randomIndex];
+        };
+
+        const determineWinner = (userChoice, computerChoice) => {
+            if (userChoice === computerChoice) {
+                return "It's a draw!";
+            }
+            if (
+                (userChoice === "rock" && computerChoice === "scissors") ||
+                (userChoice === "paper" && computerChoice === "rock") ||
+                (userChoice === "scissors" && computerChoice === "paper")
+            ) {
+                userScore++;
+                userScoreSpan.textContent = userScore;
+                return "You win!";
+            } else {
+                compScore++;
+                compScoreSpan.textContent = compScore;
+                return "You lose!";
+            }
+        };
+
+        choices.forEach(choice => {
+            choice.addEventListener("click", () => {
+                const userChoice = choice.id;
+                const computerChoice = getComputerChoice();
+                const result = determineWinner(userChoice, computerChoice);
+                resultDiv.textContent = `You chose ${userChoice}, computer chose ${computerChoice}. ${result}`;
+            });
+        });
+    </script>
+</body>
+</html>
